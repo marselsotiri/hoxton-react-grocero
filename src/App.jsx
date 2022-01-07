@@ -4,12 +4,21 @@ import Store from './component/StoreItem'
 import Cart from './component/StoreItem'
 
 function App() {
+
+  const [store, setStore] = useState([{
+    id: 1,
+    name: 'beetroot',
+    price: 0.35,
+    stock: 10,
+    amountInCart: 0
+  }])
+
   return <>
-  
-  <header id="store">
+
+    <header id="store">
       <h1>Grocero</h1>
       <ul className="item-list store--item-list">
-        <Cart /> 
+        <Cart />
       </ul>
     </header>
     <main id="cart">
@@ -32,7 +41,7 @@ function App() {
       </div>
     </main>
 
-    </>
+  </>
 }
 
 export default App
