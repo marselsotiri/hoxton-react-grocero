@@ -1,45 +1,51 @@
 import { useState } from 'react'
 import './App.css'
-import Store from './component/StoreItem'
-import Cart from './component/StoreItem'
+
+import Header from './component/Header'
+import Main from './component/Main'
+import data from './data/data'
+
+
 
 function App() {
 
-  const [store, setStore] = useState([{
-    id: 1,
-    name: 'beetroot',
-    price: 0.35,
-    stock: 10,
-    amountInCart: 0
-  }])
+  const [item, setItem] = useState(data)
+
+  let GrocieresToDisplay = item
+
+  function getCart() {
+    return GrocieresToDisplay.filter(item => item.amountInCart > 0)
+  }
+
+  function getTotal() {
+    let total = 0
+
+    const cart = getCart()
+
+    for (const item of cart) {
+      total += item.price * item.amountInCart
+    }
+
+    return total
+  }
+
+  function addItemToCart(item) {
+    const updatedItems = [...GrocieresToDisplay]
+    item.amountInCart++
+    setItem(updatedItems)
+  }
+
+  function removeItemFromCart(item) {
+    const updatedItems = [...GrocieresToDisplay]
+    item.amountInCart--
+    setItem(updatedItems)
+  }
 
   return <>
 
-    <header id="store">
-      <h1>Grocero</h1>
-      <ul className="item-list store--item-list">
-        <Cart />
-      </ul>
-    </header>
-    <main id="cart">
-      <h2>Your Cart</h2>
+    <Header GrocieresToDisplay={GrocieresToDisplay} addItemToCart={addItemToCart} />
 
-      <div className="cart--item-list-container">
-        <ul className="item-list cart--item-list">
-          <Store />
-        </ul>
-      </div>
-
-      <div className="total-section">
-        <div>
-          <h3>Total</h3>
-        </div>
-
-        <div>
-          <span className="total-number">£0.00</span>
-        </div>
-      </div>
-    </main>
+    <Main GrocieresToDisplay={GrocieresToDisplay} getTotal={getTotal} addItemToCart={addItemToCart} removeItemFromCart={removeItemFromCart} />
 
   </>
 }
