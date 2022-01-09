@@ -69,4 +69,11 @@ export default [
       stock: 10,
       amountInCart: 0
     },
+    {
+        id: 11,
+        name: 'watermelon',
+        price: 10.35,
+        stock: 10,
+        amountInCart: 0
+      }
   ]

@@ -3,13 +3,13 @@ import './App.css'
 
 import Header from './component/Header'
 import Main from './component/Main'
-import data from './data/data'
+import Data from './data/data'
 
 
 
 function App() {
 
-  const [item, setItem] = useState(data)
+  const [item, setItem] = useState(Data)
 
   let GrocieresToDisplay = item
 
